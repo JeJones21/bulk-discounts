@@ -6,8 +6,12 @@ class BulkDiscountsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find(params[:merchant_id])
+
     @bulk_discount = BulkDiscount.find(params[:id])
   end
 
+private
+  def bulk_discount_params
+    params.permit(:name, :percentage_discount, :quantity_threshold)
+  end
 end
