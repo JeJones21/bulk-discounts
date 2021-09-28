@@ -24,8 +24,13 @@ RSpec.describe 'BulkDiscount#index' do
   end
 
   it "shows link to each discount page" do
-    save_and_open_page
     expect(page).to have_link(@disco1.name)
     expect(page).to have_link(@disco2.name)
+  end
+
+  it "has a link to create a new discount" do
+    click_link "Create Bulk Discount"
+
+    expect(current_path).to eq(new_merchant_bulk_discount_path(@m1))
   end
  end
