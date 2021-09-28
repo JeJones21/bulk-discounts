@@ -26,7 +26,7 @@ RSpec.describe 'BulkDiscount#index' do
    # expect(page).to_not have_content(@disco4.quantity_threshold)
  end
 
- it 'links to each bulk discount show page' do
+ xit 'links to each bulk discount show page' do
    click_link "50% Discount"
 
    expect(current_path).to eq(merchant_bulk_discount_path(@m1, @disco1))
