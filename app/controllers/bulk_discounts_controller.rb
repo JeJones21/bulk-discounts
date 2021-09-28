@@ -6,10 +6,12 @@ class BulkDiscountsController < ApplicationController
   end
 
   def show
-
     @bulk_discount = BulkDiscount.find(params[:id])
   end
 
+  def new
+
+  end
 private
   def bulk_discount_params
     params.permit(:name, :percentage_discount, :quantity_threshold)
