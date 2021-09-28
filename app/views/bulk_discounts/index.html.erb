@@ -1,7 +1,7 @@
-<h1>Bulk Discounts From Me For You!: </h1>
-<% @bulk_discounts.each do |bd| %>
+<h1><%="Bulk Discounts From #{@merchant.name} To You!:"%> </h1>
+<% @merchant.bulk_discounts.each do |bd| %>
   <%= bd.id %>
-  <p><%= link_to "#{bd.percentage_discount}% Discount", merchant_bulk_discount_path(@merchant, bd) %></p>
+    <p><%= link_to bd.name, merchant_bulk_discount_path(@merchant, bd) %></p>
     <p>Percentage Discount: <%= bd.percentage_discount %>%</p>
     <p>Quantity Threshold Discount: <%= bd.quantity_threshold %></p>
-  <% end %>
+<% end %>
