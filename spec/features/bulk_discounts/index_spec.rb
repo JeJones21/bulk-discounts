@@ -6,10 +6,10 @@ RSpec.describe 'BulkDiscount#index' do
     @m1 = Merchant.create!(name: 'Creepy Cuddles')
 
 
-    @disco1 = @m1.bulk_discounts.create!(name: "10% OFF",percentage_discount: 10,  quantity_threshold: 5)
-    @disco2 = @m1.bulk_discounts.create!(name: "25% OFF",percentage_discount: 25,  quantity_threshold: 10)
-    @disco3 = @m1.bulk_discounts.create!(name: "50% OFF",percentage_discount: 50,  quantity_threshold: 25)
-    @disco4 = @m1.bulk_discounts.create!(name: "5 OFF%",percentage_discount: 5,  quantity_threshold: 2)
+    @disco1 = @m1.bulk_discounts.create!(name: "10% OFF", percentage_discount: 10,  quantity_threshold: 5)
+    @disco2 = @m1.bulk_discounts.create!(name: "25% OFF", percentage_discount: 25,  quantity_threshold: 10)
+    @disco3 = @m1.bulk_discounts.create!(name: "50% OFF", percentage_discount: 50,  quantity_threshold: 25)
+    @disco4 = @m1.bulk_discounts.create!(name: "5 OFF%", percentage_discount: 5, quantity_threshold: 2)
 
     visit merchant_bulk_discounts_path(@m1)
   end
@@ -24,8 +24,13 @@ RSpec.describe 'BulkDiscount#index' do
   end
 
   it "shows link to each discount page" do
-    save_and_open_page
     expect(page).to have_link(@disco1.name)
     expect(page).to have_link(@disco2.name)
+  end
+
+  it "has a link to create a new discount" do
+    click_link "Create Bulk Discount"
+
+    expect(current_path).to eq(new_merchant_bulk_discount_path(@m1))
   end
  end
