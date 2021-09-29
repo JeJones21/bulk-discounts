@@ -1,0 +1,17 @@
+<h2>This is where you create new discounts!</h2>
+<p><i>You must fill in all required fields...</i></p>
+
+
+<%= form_with url: merchant_bulk_discounts_path(@merchant), method: :post, local: true do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :percentage_discount %>
+  <%= f.number_field :percentage_discount %>
+
+  <%= f.label :quantity_threshold %>
+  <%= f.number_field :quantity_threshold, max: 100, min: 1 %>
+
+  <%= f.submit 'Submit' %>
+<% end %>
