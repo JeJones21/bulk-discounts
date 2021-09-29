@@ -54,9 +54,9 @@ describe 'Admin Invoices Index Page' do
   end
 
   it 'should display the total revenue the invoice will generate' do
-    expect(page).to have_content("Total Revenue: $#{@i1.total_revenue}")
+    expect(page).to have_content("Total Revenue: $#{@i1.total_rev}")
 
-    expect(page).to_not have_content(@i2.total_revenue)
+    expect(page).to_not have_content(@i2.total_rev)
   end
 
   it 'should have status as a select field that updates the invoices status' do
