@@ -1,0 +1,15 @@
+<h1>Make Sure You Don't Miss A Box Or Karen Will Notice</h1>
+
+<%= form_with model: [@merchant, @bulk_discount], local: true do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :percentage_discount %>
+  <%= f.number_field :percentage_discount %>
+
+  <%= f.label :quantity_threshold %>
+  <%= f.number_field :quantity_threshold, max: 100, min: 1 %>
+
+  <%= f.submit 'Submit' %>
+<% end %>
