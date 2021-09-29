@@ -3,6 +3,12 @@ class BulkDiscountsController < ApplicationController
   def index
     # @merchant = Merchant.find(params[:merchant_id])
     @bulk_discounts = @merchant.bulk_discounts.all
+
+    # GET request in Faraday order
+    # get your response.body
+    # use this to parse the body: JSON.parse(body)
+    # @holidays = all the code you need to get the holiday info out of the api 
+
   end
 
   def show
