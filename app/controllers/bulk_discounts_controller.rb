@@ -2,7 +2,7 @@ class BulkDiscountsController < ApplicationController
   before_action :current_merchant
   def index
     # @merchant = Merchant.find(params[:merchant_id])
-    @bulk_discounts = @merchant.bulk_discounts
+    @bulk_discounts = @merchant.bulk_discounts.all
   end
 
   def show
@@ -28,8 +28,15 @@ class BulkDiscountsController < ApplicationController
     end
   end
 
+  def destroy
+
+    BulkDiscount.find(params[:id]).destroy
+
+    redirect_to merchant_bulk_discounts_path(@merchant)
+  end
+
 private
   def bulk_discount_params
-    params.permit(:name, :percentage_discount, :quantity_threshold)
+    params.permit(:id, :name, :percentage_discount, :quantity_threshold)
   end
 end
