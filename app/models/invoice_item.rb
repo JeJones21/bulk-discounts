@@ -7,7 +7,8 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :invoice
   belongs_to :item
-
+  has_one :merchant, through: :item
+  has_many :bulk_discounts, through: :merchant
   enum status: [:pending, :packaged, :shipped]
 
   def self.incomplete_invoices
@@ -20,11 +21,10 @@ class InvoiceItem < ApplicationRecord
  end
 
  def discount_finder
-   item.merchant.bulk_discounts
-   .where('bulk_discounts.quantity_threshold <= ?', quantity)
-   .select('bulk_discounts.*')
-   .order(percentage_discount: :desc)
-   .first
+   item.merchant.bulk_discounts.where('bulk_discounts.quantity_threshold <= ?', quantity)
+                 .select('bulk_discounts.*')
+                 .order(percentage_discount: :desc)
+                 .first
  end
 
  def disco_rev
