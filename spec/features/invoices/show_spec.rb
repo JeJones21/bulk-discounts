@@ -5,6 +5,9 @@ RSpec.describe 'invoices show' do
     @merchant1 = Merchant.create!(name: 'Hair Care')
     @merchant2 = Merchant.create!(name: 'Jewelry')
 
+    @disco1 = @merchant1.bulk_discounts.create!(name: "20% OFF", percentage_discount: 20, quantity_threshold: 10)
+    @disco2 = @merchant1.bulk_discounts.create!(name: "10% OFF", percentage_discount: 10, quantity_threshold: 5)
+
     @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
     @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
     @item_3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: @merchant1.id)
@@ -90,6 +93,16 @@ RSpec.describe 'invoices show' do
     expect(page).to have_content(@invoice_1.disc_total)
   end
 
+  it "shows a link to a bulk discount if applied next to the invoice item" do
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+
+    within("#the-status-#{@ii_1.id}") do
+     click_on(@ii_1.discount_finder.name)
+
+   end
+    expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @disco2))
+  end
+
   it "shows a select field to update the invoice status" do
     visit merchant_invoice_path(@merchant1, @invoice_1)
 
@@ -104,5 +117,4 @@ RSpec.describe 'invoices show' do
        expect(page).to_not have_content("in progress")
      end
   end
-
 end
