@@ -45,4 +45,10 @@ RSpec.describe 'BulkDiscount#index' do
 
     expect(current_path).to eq(merchant_bulk_discounts_path(@m1))
   end
+
+  it 'can display the next three upcoming holidays with their name and date' do
+    expect(page).to have_content("Columbus Day 2021-10-11")
+    expect(page).to have_content("Veterans Day 2021-11-11")
+    expect(page).to have_content("Thanksgiving Day 2021-11-25")
+  end
  end
